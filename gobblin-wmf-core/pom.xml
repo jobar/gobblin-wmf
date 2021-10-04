@@ -1,22 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>org.wikimedia.gobblin</groupId>
         <artifactId>gobblin-wmf</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
     <groupId>org.wikimedia.gobblin</groupId>
     <artifactId>gobblin-wmf-core</artifactId>
     <version>1.0-SNAPSHOT</version>
-
+    <packaging>jar</packaging>
     <name>WMF specific extenstions to Gobblin - core</name>
     <description></description>
-
-    <packaging>jar</packaging>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wikimedia</groupId>
+            <artifactId>eventutilities</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.gobblin</groupId>
+            <artifactId>gobblin-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.gobblin</groupId>
+            <artifactId>gobblin-cluster</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.gobblin</groupId>
+            <artifactId>gobblin-codecs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.gobblin</groupId>
+            <artifactId>gobblin-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.gobblin</groupId>
+            <artifactId>gobblin-metrics</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.gobblin</groupId>
+            <artifactId>gobblin-metastore</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.gobblin</groupId>
+            <artifactId>gobblin-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.gobblin</groupId>
+            <artifactId>gobblin-runtime</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.gobblin</groupId>
+            <artifactId>gobblin-utility</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.gobblin</groupId>
+            <artifactId>gobblin-kafka-1</artifactId>
+        </dependency>
+    </dependencies>
 </project>
