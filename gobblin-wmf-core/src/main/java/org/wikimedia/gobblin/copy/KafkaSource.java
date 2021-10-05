@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.gobblin.source.extractor.extract.kafka;
+package org.wikimedia.gobblin.copy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +83,13 @@ import static java.util.stream.Collectors.toSet;
 /**
  * A {@link org.apache.gobblin.source.Source} implementation for Kafka source.
  *
- * @author Ziyang Liu
+ * This is an updated copy of {@link org.apache.gobblin.source.extractor.extract.kafka.KafkaSource}
+ * in the gobblin-kafka-common module. This file should be deleted in favor of the upstream version when possible.
+ * Updates are:
+ *  - Make {@link #getFilteredTopics} method protected instead of private
+ *    https://github.com/apache/gobblin/pull/3408
+ *
+ *  @author Ziyang Liu
  */
 @SuppressForbidden
 public abstract class KafkaSource<S, D> extends EventBasedSource<S, D> {

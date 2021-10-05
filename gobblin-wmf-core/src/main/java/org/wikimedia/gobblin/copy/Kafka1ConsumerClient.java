@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.gobblin.kafka.client;
+package org.wikimedia.gobblin.copy;
 
 import com.codahale.metrics.Gauge;
 import com.codahale.metrics.Metric;
@@ -63,6 +63,12 @@ import java.util.stream.Collectors;
  *
  * @param <K> Message key type
  * @param <V> Message value type
+ *
+ * This is an updated copy of {@link org.apache.gobblin.kafka.client.Kafka1ConsumerClient}
+ * in gobblin-kafka-1 module. This file should be deleted in favor of the upstream version when possible.
+ * Updates are:
+ *  - Expose kafka-record timestamp in {@link Kafka1ConsumerRecord}
+ *    https://github.com/apache/gobblin/pull/3244
  */
 @Slf4j
 public class Kafka1ConsumerClient<K, V> extends AbstractBaseKafkaConsumerClient {

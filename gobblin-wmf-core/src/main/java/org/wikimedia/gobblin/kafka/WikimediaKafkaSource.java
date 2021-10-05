@@ -20,7 +20,7 @@ package org.wikimedia.gobblin.kafka;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.gobblin.configuration.SourceState;
-import org.apache.gobblin.source.extractor.extract.kafka.KafkaSource;
+import org.wikimedia.gobblin.copy.KafkaSource;
 import org.apache.gobblin.source.extractor.extract.kafka.KafkaTopic;
 import org.apache.gobblin.util.DatasetFilterUtils;
 import org.wikimedia.eventutilities.core.event.EventStreamConfig;
