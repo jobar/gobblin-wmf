@@ -17,6 +17,8 @@
 
 package org.wikimedia.gobblin.writer;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.common.base.Optional;
 import org.apache.commons.io.IOUtils;
 import org.apache.gobblin.configuration.ConfigurationKeys;
@@ -37,6 +39,7 @@ import org.testng.annotations.Test;
 
 import java.io.*;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.zip.GZIPInputStream;
 
@@ -49,7 +52,7 @@ public class TestTimestampedStringRecordWriter {
 
     private String filePath;
     private final String schema = "";
-    private final int newLine = "\n".getBytes()[0];
+    private final int newLine = "\n".getBytes(UTF_8)[0];
     private State properties;
     private static final String ENCRYPT_PREFIX = "writer.encrypt.";
 
@@ -109,12 +112,12 @@ public class TestTimestampedStringRecordWriter {
         writer.commit();
 
         Assert.assertEquals(writer.recordsWritten(), 3);
-        Assert.assertEquals(writer.bytesWritten(), rec1.getBytes().length + rec2.getBytes().length + rec3.getBytes().length + 3); // 3 bytes for newline character
+        Assert.assertEquals(writer.bytesWritten(), rec1.getBytes(UTF_8).length + rec2.getBytes(UTF_8).length + rec3.getBytes(UTF_8).length + 3); // 3 bytes for newline character
 
         File outputFile = new File(writer.getOutputFilePath());
         InputStream is = new FileInputStream(outputFile);
         int c, resNum = 0, resi = 0;
-        byte[][] records = { rec1.getBytes(), rec2.getBytes(), rec3.getBytes() };
+        byte[][] records = { rec1.getBytes(UTF_8), rec2.getBytes(UTF_8), rec3.getBytes(UTF_8) };
         while ((c = is.read()) != -1) {
             if (c != newLine) {
                 Assert.assertEquals(c, records[resNum][resi]);
@@ -141,7 +144,7 @@ public class TestTimestampedStringRecordWriter {
         File outputFile = new File(writer.getOutputFilePath());
         InputStream in = new GZIPInputStream(new FileInputStream(outputFile));
 
-        String contents = new String(IOUtils.toByteArray(in));
+        String contents = new String(IOUtils.toByteArray(in), UTF_8);
         Assert.assertEquals(contents, toWrite + "\n", "Expected gzip'd content to be written out");
         Assert.assertTrue(outputFile.getName().endsWith(".gz"), "Expected gzip'd file to end in .gz");
     }
@@ -172,7 +175,7 @@ public class TestTimestampedStringRecordWriter {
                         .decodeInputStream(new FileInputStream(outputFile));
         InputStream uncompressedFile = new GZIPInputStream(decryptedFile);
 
-        String contents = new String(IOUtils.toByteArray(uncompressedFile));
+        String contents = new String(IOUtils.toByteArray(uncompressedFile), UTF_8);
         Assert.assertEquals(contents, toWrite + "\n", "expected to decode same contents");
     }
 
@@ -188,9 +191,9 @@ public class TestTimestampedStringRecordWriter {
         int totalBytes = 3; // 3 extra bytes for the newline character
         // Write all test records
         for (String record : TestConstants.JSON_RECORDS) {
-            Assert.assertEquals(record.getBytes().length, record.length()); // ensure null byte does not get added to end
+            Assert.assertEquals(record.getBytes(UTF_8).length, record.length()); // ensure null byte does not get added to end
             writer.write(makeTR(record));
-            totalBytes += record.getBytes().length;
+            totalBytes += record.getBytes(UTF_8).length;
         }
 
         writer.close();
@@ -200,7 +203,7 @@ public class TestTimestampedStringRecordWriter {
         Assert.assertEquals(writer.bytesWritten(), totalBytes);
 
         File outputFile = new File(writer.getOutputFilePath());
-        BufferedReader br = new BufferedReader(new FileReader(outputFile));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(outputFile), UTF_8));
         String line;
         int lineNumber = 0;
         while ((line = br.readLine()) != null) {
@@ -240,7 +243,7 @@ public class TestTimestampedStringRecordWriter {
         FileSystem fs = FileSystem.get(URI.create(TestConstants.TEST_FS_URI), conf);
 
         OutputStream os = fs.create(stagingFile);
-        os.write(randomStringStage.getBytes());
+        os.write(randomStringStage.getBytes(UTF_8));
         os.flush();
         os.close();
 
@@ -251,7 +254,7 @@ public class TestTimestampedStringRecordWriter {
         writer.commit();
 
         Assert.assertEquals(writer.recordsWritten(), 1);
-        Assert.assertEquals(writer.bytesWritten(), randomStringWrite.getBytes().length + 1);
+        Assert.assertEquals(writer.bytesWritten(), randomStringWrite.getBytes(UTF_8).length + 1);
 
         File writeFile = new File(writer.getOutputFilePath());
         int c, i = 0;
@@ -262,7 +265,7 @@ public class TestTimestampedStringRecordWriter {
                 i++;
                 continue;
             }
-            Assert.assertEquals(randomStringWrite.getBytes()[i], c);
+            Assert.assertEquals(randomStringWrite.getBytes(UTF_8)[i], c);
             i++;
         }
     }
