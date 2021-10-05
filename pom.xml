@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>org.wikimedia.gobblin</groupId>
     <artifactId>gobblin-wmf</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>WMF specific extenstions to Gobblin</name>
-    <description></description>
+    <description />
     <modules>
         <module>gobblin-wmf-core</module>
     </modules>
     <properties>
+        <gobblin.version>0.15.0</gobblin.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <gobblin.version>0.15.0</gobblin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.wikimedia</groupId>
-                <artifactId>eventutilities</artifactId>
-                <version>1.0.8</version>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.17</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.gobblin</groupId>
@@ -31,12 +31,12 @@
                 <version>${gobblin.version}</version>
                 <exclusions>
                     <exclusion>
-                        <artifactId>jcl-over-slf4j</artifactId>
                         <groupId>org.slf4j</groupId>
+                        <artifactId>jcl-over-slf4j</artifactId>
                     </exclusion>
                     <exclusion>
-                        <artifactId>log4j-over-slf4j</artifactId>
                         <groupId>org.slf4j</groupId>
+                        <artifactId>log4j-over-slf4j</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
@@ -46,12 +46,12 @@
                 <version>${gobblin.version}</version>
                 <exclusions>
                     <exclusion>
-                        <artifactId>jcl-over-slf4j</artifactId>
                         <groupId>org.slf4j</groupId>
+                        <artifactId>jcl-over-slf4j</artifactId>
                     </exclusion>
                     <exclusion>
-                        <artifactId>log4j-over-slf4j</artifactId>
                         <groupId>org.slf4j</groupId>
+                        <artifactId>log4j-over-slf4j</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
@@ -66,72 +66,12 @@
                 <version>${gobblin.version}</version>
                 <exclusions>
                     <exclusion>
+                        <groupId>org.slf4j</groupId>
                         <artifactId>jcl-over-slf4j</artifactId>
-                        <groupId>org.slf4j</groupId>
                     </exclusion>
                     <exclusion>
+                        <groupId>org.slf4j</groupId>
                         <artifactId>log4j-over-slf4j</artifactId>
-                        <groupId>org.slf4j</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.gobblin</groupId>
-                <artifactId>gobblin-metrics</artifactId>
-                <version>${gobblin.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>jcl-over-slf4j</artifactId>
-                        <groupId>org.slf4j</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>log4j-over-slf4j</artifactId>
-                        <groupId>org.slf4j</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.gobblin</groupId>
-                <artifactId>gobblin-metastore</artifactId>
-                <version>${gobblin.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>jcl-over-slf4j</artifactId>
-                        <groupId>org.slf4j</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>log4j-over-slf4j</artifactId>
-                        <groupId>org.slf4j</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.gobblin</groupId>
-                <artifactId>gobblin-runtime</artifactId>
-                <version>${gobblin.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>jcl-over-slf4j</artifactId>
-                        <groupId>org.slf4j</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>log4j-over-slf4j</artifactId>
-                        <groupId>org.slf4j</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.gobblin</groupId>
-                <artifactId>gobblin-utility</artifactId>
-                <version>${gobblin.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>jcl-over-slf4j</artifactId>
-                        <groupId>org.slf4j</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>log4j-over-slf4j</artifactId>
-                        <groupId>org.slf4j</groupId>
                     </exclusion>
                 </exclusions>
             </dependency>
@@ -141,12 +81,72 @@
                 <version>${gobblin.version}</version>
                 <exclusions>
                     <exclusion>
-                        <artifactId>jcl-over-slf4j</artifactId>
                         <groupId>org.slf4j</groupId>
+                        <artifactId>jcl-over-slf4j</artifactId>
                     </exclusion>
                     <exclusion>
-                        <artifactId>log4j-over-slf4j</artifactId>
                         <groupId>org.slf4j</groupId>
+                        <artifactId>log4j-over-slf4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.gobblin</groupId>
+                <artifactId>gobblin-metastore</artifactId>
+                <version>${gobblin.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>jcl-over-slf4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>log4j-over-slf4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.gobblin</groupId>
+                <artifactId>gobblin-metrics</artifactId>
+                <version>${gobblin.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>jcl-over-slf4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>log4j-over-slf4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.gobblin</groupId>
+                <artifactId>gobblin-runtime</artifactId>
+                <version>${gobblin.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>jcl-over-slf4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>log4j-over-slf4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.gobblin</groupId>
+                <artifactId>gobblin-utility</artifactId>
+                <version>${gobblin.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>jcl-over-slf4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>log4j-over-slf4j</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
@@ -162,20 +162,20 @@
                 <version>1.18.18</version>
             </dependency>
             <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>1.7.21</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wikimedia</groupId>
+                <artifactId>eventutilities</artifactId>
+                <version>1.0.8</version>
+            </dependency>
+            <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
                 <version>6.14.3</version>
                 <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>1.2.17</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>1.7.21</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
