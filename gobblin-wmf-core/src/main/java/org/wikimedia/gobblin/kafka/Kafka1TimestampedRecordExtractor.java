@@ -20,7 +20,7 @@ package org.wikimedia.gobblin.kafka;
 import com.google.common.base.Optional;
 import org.apache.gobblin.configuration.WorkUnitState;
 import org.apache.gobblin.kafka.client.ByteArrayBasedKafkaRecord;
-import org.apache.gobblin.kafka.client.Kafka1ConsumerClient;
+import org.wikimedia.gobblin.copy.Kafka1ConsumerClient;
 import org.apache.gobblin.kafka.client.KafkaConsumerRecord;
 import org.apache.gobblin.source.extractor.DataRecordException;
 import org.apache.gobblin.source.extractor.extract.kafka.KafkaExtractor;

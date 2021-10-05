@@ -23,7 +23,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import com.google.common.base.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.gobblin.configuration.WorkUnitState;
-import org.apache.gobblin.kafka.client.Kafka1ConsumerClient;
+import org.wikimedia.gobblin.copy.Kafka1ConsumerClient;
 import org.apache.gobblin.source.extractor.DataRecordException;
 import org.wikimedia.gobblin.TimestampedRecord;
 import org.apache.kafka.common.record.TimestampType;
@@ -31,7 +31,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.NoSuchElementException;
 
 /**
