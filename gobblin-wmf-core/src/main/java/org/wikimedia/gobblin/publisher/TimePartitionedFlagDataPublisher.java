@@ -60,7 +60,7 @@ public class TimePartitionedFlagDataPublisher extends DataPublisher {
     private final String flag;
 
     private final Closer closer = Closer.create();
-    private final ParallelRunner parallelRunner;
+    private final ParallelRunnerWithTouch parallelRunner;
 
     private final Set<Path> publishedFlags = Sets.newHashSet();
 
@@ -75,7 +75,7 @@ public class TimePartitionedFlagDataPublisher extends DataPublisher {
         // This publisher writes empty files - no checksum needed
         publisherFs.setWriteChecksum(false);
 
-        this.parallelRunner = new ParallelRunner(parallelRunnerThreads, publisherFs);
+        this.parallelRunner = new ParallelRunnerWithTouch(parallelRunnerThreads, publisherFs);
         this.closer.register(this.parallelRunner);
     }
 
