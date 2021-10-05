@@ -18,6 +18,8 @@
 
 package org.wikimedia.gobblin.kafka;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.common.base.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.gobblin.configuration.WorkUnitState;
@@ -29,6 +31,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.NoSuchElementException;
 
 /**
@@ -39,7 +42,7 @@ import java.util.NoSuchElementException;
 public class TestKafka1TimestampedRecordExtractor {
 
     private static final String TEST_TOPIC_NAME = "testTopic";
-    private static final byte[] testPayload = "Hello World".getBytes();
+    private static final byte[] testPayload = "Hello World".getBytes(UTF_8);
     private static final long testTimestamp = 1420099200000L;
     private static final Optional<String> noString = Optional.absent();
 
