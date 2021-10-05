@@ -17,11 +17,11 @@
 
 package org.wikimedia.gobblin.utils;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import java.util.Arrays;
 import java.util.List;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 
 /**
@@ -77,12 +77,12 @@ public class TestJsonStringTimestampExtractor {
         Assert.assertTrue(timestampExtractor.getRecordTimestamp("{\"meta\": {\"dt\": 1420099200000}}") >= currentTime);
     }
 
-    @Test(expectedExceptions=IllegalArgumentException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testNullFormatExtractor() {
         timestampExtractor = new JsonStringTimestampExtractor(tsColumn, null);
     }
 
-    @Test(expectedExceptions=IllegalArgumentException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testWrongFormatExtractor() {
         timestampExtractor = new JsonStringTimestampExtractor(tsColumn, "wrong format");
     }

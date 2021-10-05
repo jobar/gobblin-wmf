@@ -18,12 +18,18 @@
 package org.wikimedia.gobblin.writer;
 
 /**
- * Copied and modified from gobblin-core:org.apache.gobblin.writer.TestConstants
+ * Copied and modified from gobblin-core:org.apache.gobblin.writer.TestConstants.
  */
-public class TestConstants {
+public final class TestConstants {
+
+    private TestConstants() {
+        // Hide constructor of utility class
+    }
 
     public static final String[] JSON_RECORDS =
-            {"{\"name\": \"Alyssa\", \"favorite_number\": 256, \"favorite_color\": \"yellow\"}", "{\"name\": \"Ben\", \"favorite_number\": 7, \"favorite_color\": \"red\"}", "{\"name\": \"Charlie\", \"favorite_number\": 68, \"favorite_color\": \"blue\"}"};
+            {"{\"name\": \"Alyssa\", \"favorite_number\": 256, \"favorite_color\": \"yellow\"}",
+                    "{\"name\": \"Ben\", \"favorite_number\": 7, \"favorite_color\": \"red\"}",
+                    "{\"name\": \"Charlie\", \"favorite_number\": 68, \"favorite_color\": \"blue\"}"};
 
     public static final String TEST_FS_URI = "file://localhost/";
 

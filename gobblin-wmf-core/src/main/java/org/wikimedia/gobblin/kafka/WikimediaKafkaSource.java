@@ -17,20 +17,20 @@
 
 package org.wikimedia.gobblin.kafka;
 
-
-import lombok.extern.slf4j.Slf4j;
-import org.apache.gobblin.configuration.SourceState;
-import org.wikimedia.gobblin.copy.KafkaSource;
-import org.apache.gobblin.source.extractor.extract.kafka.KafkaTopic;
-import org.apache.gobblin.util.DatasetFilterUtils;
-import org.wikimedia.eventutilities.core.event.EventStreamConfig;
-import org.wikimedia.eventutilities.core.event.WikimediaDefaults;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import org.apache.gobblin.configuration.SourceState;
+import org.apache.gobblin.source.extractor.extract.kafka.KafkaTopic;
+import org.apache.gobblin.util.DatasetFilterUtils;
+import org.wikimedia.eventutilities.core.event.EventStreamConfig;
+import org.wikimedia.eventutilities.core.event.WikimediaDefaults;
+import org.wikimedia.gobblin.copy.KafkaSource;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public abstract class WikimediaKafkaSource<S, D> extends KafkaSource<S, D> {

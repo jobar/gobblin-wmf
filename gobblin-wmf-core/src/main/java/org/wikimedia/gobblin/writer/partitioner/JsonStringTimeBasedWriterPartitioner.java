@@ -18,15 +18,15 @@
 
 package org.wikimedia.gobblin.writer.partitioner;
 
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+
 import org.apache.gobblin.configuration.ConfigurationKeys;
 import org.apache.gobblin.configuration.State;
 import org.apache.gobblin.util.ForkOperatorUtils;
-import org.wikimedia.gobblin.utils.JsonStringTimestampExtractor;
 import org.apache.gobblin.writer.partitioner.TimeBasedWriterPartitioner;
+import org.wikimedia.gobblin.utils.JsonStringTimestampExtractor;
 
-import java.util.List;
-
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * A {@link TimeBasedWriterPartitioner} for byte[] containing json.
@@ -66,7 +66,7 @@ public class JsonStringTimeBasedWriterPartitioner extends TimeBasedWriterPartiti
     }
 
     /**
-     * Utility function facilitating getting a timestamp-column
+     * Utility function facilitating getting a timestamp-column.
      */
     public static List<String> getWriterPartitionerTimestampColumns(State state, int numBranches, int branchId) {
         String propName = ForkOperatorUtils.getPropertyNameForBranch(TIMESTAMP_COLUMNS_KEY, numBranches, branchId);
@@ -77,7 +77,7 @@ public class JsonStringTimeBasedWriterPartitioner extends TimeBasedWriterPartiti
     }
 
     /**
-     * Utility function facilitating getting a timestamp-format
+     * Utility function facilitating getting a timestamp-format.
      */
     public static String getWriterPartitionerTimestampFormat(State state, int numBranches, int branchId) {
         String propName = ForkOperatorUtils.getPropertyNameForBranch(TIMESTAMP_FORMAT_KEY, numBranches, branchId);

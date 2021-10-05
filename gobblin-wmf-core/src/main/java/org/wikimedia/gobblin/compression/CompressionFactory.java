@@ -17,17 +17,17 @@
 
 package org.wikimedia.gobblin.compression;
 
+import java.util.Map;
+
 import org.apache.gobblin.codec.StreamCodec;
 import org.apache.gobblin.compression.CompressionConfigParser;
-
-import java.util.Map;
 
 
 /**
  * Duplication of {@link org.apache.gobblin.compression.CompressionFactory} to use
- * a modified instance of GzipCodec generating '.gz' extensions instead of '.gzip'
+ * a modified instance of GzipCodec generating '.gz' extensions instead of '.gzip'.
  */
-public class CompressionFactory {
+public final class CompressionFactory {
     public static StreamCodec buildStreamCompressor(Map<String, Object> properties) {
         String type = CompressionConfigParser.getCompressionType(properties);
         switch (type) {

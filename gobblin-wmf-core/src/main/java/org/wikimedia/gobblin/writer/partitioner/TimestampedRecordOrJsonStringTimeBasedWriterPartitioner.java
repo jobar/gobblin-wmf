@@ -18,11 +18,11 @@
 
 package org.wikimedia.gobblin.writer.partitioner;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.gobblin.configuration.State;
-import org.wikimedia.gobblin.utils.JsonStringTimestampExtractor;
 import org.apache.gobblin.writer.partitioner.TimeBasedWriterPartitioner;
+import org.wikimedia.gobblin.utils.JsonStringTimestampExtractor;
 
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * A {@link TimeBasedWriterPartitioner} for Timestamped byte[] records whose payload contains json.

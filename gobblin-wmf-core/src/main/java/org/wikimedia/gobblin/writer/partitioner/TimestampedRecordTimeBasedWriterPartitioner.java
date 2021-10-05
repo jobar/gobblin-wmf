@@ -18,11 +18,11 @@
 
 package org.wikimedia.gobblin.writer.partitioner;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.gobblin.configuration.State;
-import org.wikimedia.gobblin.TimestampedRecord;
 import org.apache.gobblin.writer.partitioner.TimeBasedWriterPartitioner;
+import org.wikimedia.gobblin.TimestampedRecord;
 
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * A {@link TimeBasedWriterPartitioner} for byte[] containing json.
@@ -46,7 +46,7 @@ public class TimestampedRecordTimeBasedWriterPartitioner<P> extends TimeBasedWri
     @Override
     public long getRecordTimestamp(TimestampedRecord<P> record) {
         // If a kafka timestamp is set, use it
-        if (record.getTimestamp().isPresent()){
+        if (record.getTimestamp().isPresent()) {
             return record.getTimestamp().get();
         } else { // Otherwise return current timestamp
             return getNonKafkaTimestamp(record.getPayload());

@@ -17,9 +17,11 @@
 
 package org.wikimedia.gobblin;
 
+import com.google.common.base.Optional;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import com.google.common.base.Optional;
+
 
 @Getter
 @EqualsAndHashCode

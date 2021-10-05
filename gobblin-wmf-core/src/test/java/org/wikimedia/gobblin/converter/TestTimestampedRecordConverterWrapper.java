@@ -17,20 +17,21 @@
 
 package org.wikimedia.gobblin.converter;
 
+import java.util.Iterator;
 
-import com.google.common.base.Charsets;
-import com.google.common.base.Optional;
 import org.apache.gobblin.configuration.WorkUnitState;
 import org.apache.gobblin.converter.DataConversionException;
 import org.wikimedia.gobblin.TimestampedRecord;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.Iterator;
+import com.google.common.base.Charsets;
+import com.google.common.base.Optional;
+
 
 public class TestTimestampedRecordConverterWrapper {
 
-    @Test(expectedExceptions=RuntimeException.class)
+    @Test(expectedExceptions = RuntimeException.class)
     public void testNoConfig() {
         WorkUnitState workUnitState = new WorkUnitState();
 
@@ -38,7 +39,7 @@ public class TestTimestampedRecordConverterWrapper {
                 (TimestampedRecordConverterWrapper) new TimestampedRecordConverterWrapper().init(workUnitState);
     }
 
-    @Test(expectedExceptions=RuntimeException.class)
+    @Test(expectedExceptions = RuntimeException.class)
     public void testWrongConfig() {
         WorkUnitState workUnitState = new WorkUnitState();
         workUnitState.setProp(

@@ -18,20 +18,21 @@
 
 package org.wikimedia.gobblin.kafka;
 
-import lombok.extern.slf4j.Slf4j;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Map;
+
 import org.apache.gobblin.configuration.WorkUnitState;
 import org.apache.gobblin.source.extractor.Extractor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
+
 
 /**
- * Tests for {@link WikimediaKafkaSource}
+ * Tests for {@link WikimediaKafkaSource}.
  */
-
 @Slf4j
 public class TestWikimediaKafkaSource {
 

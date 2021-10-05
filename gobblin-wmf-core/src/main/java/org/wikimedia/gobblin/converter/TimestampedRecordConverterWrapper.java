@@ -17,8 +17,9 @@
 
 package org.wikimedia.gobblin.converter;
 
-import com.google.common.base.Optional;
-import com.google.common.base.Preconditions;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 import org.apache.gobblin.configuration.WorkUnitState;
 import org.apache.gobblin.converter.Converter;
 import org.apache.gobblin.converter.DataConversionException;
@@ -26,8 +27,9 @@ import org.apache.gobblin.converter.SchemaConversionException;
 import org.apache.gobblin.util.ForkOperatorUtils;
 import org.wikimedia.gobblin.TimestampedRecord;
 
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
+import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
+
 
 public class TimestampedRecordConverterWrapper<I, O>
         extends Converter<String, String, TimestampedRecord<I>, TimestampedRecord<O>> {

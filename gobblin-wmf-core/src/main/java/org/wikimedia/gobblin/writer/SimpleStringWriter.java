@@ -17,17 +17,18 @@
 
 package org.wikimedia.gobblin.writer;
 
-import com.google.common.base.Preconditions;
-import org.apache.gobblin.configuration.ConfigurationKeys;
-import org.apache.gobblin.configuration.State;
-import org.apache.gobblin.writer.FsDataWriter;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
 
+import org.apache.gobblin.configuration.ConfigurationKeys;
+import org.apache.gobblin.configuration.State;
+import org.apache.gobblin.writer.FsDataWriter;
+
+import com.google.common.base.Preconditions;
+
 /**
- * Copied and updated from SimpleDataWriter
+ * Copied and updated from SimpleDataWriter.
  */
 public class SimpleStringWriter extends FsDataWriter<String> {
 
@@ -57,7 +58,7 @@ public class SimpleStringWriter extends FsDataWriter<String> {
     }
 
     /**
-     * Write a source record to the staging file
+     * Write a source record to the staging file.
      *
      * @param record data record to write
      * @throws java.io.IOException if there is anything wrong writing the record
@@ -100,12 +101,11 @@ public class SimpleStringWriter extends FsDataWriter<String> {
     }
 
     /**
-     * Flush the staging file
+     * Flush the staging file.
      * @throws IOException
      */
     @Override
     public void flush() throws IOException {
         this.stagingFileOutputStream.flush();
     }
-
 }

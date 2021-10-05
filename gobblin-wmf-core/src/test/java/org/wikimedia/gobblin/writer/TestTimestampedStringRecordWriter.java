@@ -19,13 +19,22 @@ package org.wikimedia.gobblin.writer;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import com.google.common.base.Optional;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URI;
+import java.util.Collections;
+import java.util.zip.GZIPInputStream;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.gobblin.configuration.ConfigurationKeys;
 import org.apache.gobblin.configuration.State;
 import org.apache.gobblin.crypto.EncryptionConfigParser;
 import org.apache.gobblin.crypto.EncryptionFactory;
-import org.wikimedia.gobblin.TimestampedRecord;
 import org.apache.gobblin.writer.Destination;
 import org.apache.gobblin.writer.WriterOutputFormat;
 import org.apache.hadoop.conf.Configuration;
@@ -36,16 +45,14 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.wikimedia.gobblin.TimestampedRecord;
 
-import java.io.*;
-import java.net.URI;
-import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.zip.GZIPInputStream;
+import com.google.common.base.Optional;
+
 
 /**
- * Tests for {@link TimestampedRecordWriterWrapper}
- * Copied and updated from gobblin-core:org.apache.gobblin.writer.SimpleDataWriterTest
+ * Tests for {@link TimestampedRecordWriterWrapper}.
+ * Copied and updated from gobblin-core:org.apache.gobblin.writer.SimpleDataWriterTest.
  */
 @Test
 public class TestTimestampedStringRecordWriter {
@@ -112,12 +119,17 @@ public class TestTimestampedStringRecordWriter {
         writer.commit();
 
         Assert.assertEquals(writer.recordsWritten(), 3);
-        Assert.assertEquals(writer.bytesWritten(), rec1.getBytes(UTF_8).length + rec2.getBytes(UTF_8).length + rec3.getBytes(UTF_8).length + 3); // 3 bytes for newline character
+        Assert.assertEquals(
+                writer.bytesWritten(),
+                // 3 bytes for newline character
+                rec1.getBytes(UTF_8).length + rec2.getBytes(UTF_8).length + rec3.getBytes(UTF_8).length + 3);
 
         File outputFile = new File(writer.getOutputFilePath());
         InputStream is = new FileInputStream(outputFile);
-        int c, resNum = 0, resi = 0;
-        byte[][] records = { rec1.getBytes(UTF_8), rec2.getBytes(UTF_8), rec3.getBytes(UTF_8) };
+        int c;
+        int resNum = 0;
+        int resi = 0;
+        byte[][] records = {rec1.getBytes(UTF_8), rec2.getBytes(UTF_8), rec3.getBytes(UTF_8)};
         while ((c = is.read()) != -1) {
             if (c != newLine) {
                 Assert.assertEquals(c, records[resNum][resi]);
@@ -257,7 +269,8 @@ public class TestTimestampedStringRecordWriter {
         Assert.assertEquals(writer.bytesWritten(), randomStringWrite.getBytes(UTF_8).length + 1);
 
         File writeFile = new File(writer.getOutputFilePath());
-        int c, i = 0;
+        int c;
+        int i = 0;
         InputStream is = new FileInputStream(writeFile);
         while ((c = is.read()) != -1) {
             if (i == 15) {
