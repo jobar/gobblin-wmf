@@ -18,6 +18,8 @@
 
 package org.wikimedia.gobblin.utils;
 
+import static java.util.Locale.ENGLISH;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +28,7 @@ import org.joda.time.DateTime;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 
@@ -69,7 +72,7 @@ public class JsonStringTimestampExtractor {
             this.timestampParser = null;
         } catch (IllegalArgumentException iae) {
             this.timestampFormat = TimestampFormat.CUSTOM;
-            this.timestampParser = new SimpleDateFormat(timestampFormatStr);
+            this.timestampParser = new SimpleDateFormat(timestampFormatStr, ENGLISH);
         } catch (NullPointerException npe) {
             throw new IllegalArgumentException("Parameter timestampFormat shouldn't be null", npe);
         }

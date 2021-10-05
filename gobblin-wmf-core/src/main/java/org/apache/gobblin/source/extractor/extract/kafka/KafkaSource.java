@@ -50,6 +50,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.typesafe.config.Config;
 
+import de.thetaphi.forbiddenapis.SuppressForbidden;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -84,6 +85,7 @@ import static java.util.stream.Collectors.toSet;
  *
  * @author Ziyang Liu
  */
+@SuppressForbidden
 public abstract class KafkaSource<S, D> extends EventBasedSource<S, D> {
 
     private static final Logger LOG = LoggerFactory.getLogger(KafkaSource.class);
@@ -813,6 +815,7 @@ public abstract class KafkaSource<S, D> extends EventBasedSource<S, D> {
     /**
      * This class contains startOffset, earliestOffset and latestOffset for a Kafka partition.
      */
+    @SuppressForbidden
     private static class Offsets {
 
         @Getter
