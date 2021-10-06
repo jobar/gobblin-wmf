@@ -27,6 +27,36 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.11.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>15.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.typesafe</groupId>
+                <artifactId>config</artifactId>
+                <version>1.2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.5</version>
+            </dependency>
+            <dependency>
+                <groupId>io.dropwizard.metrics</groupId>
+                <artifactId>metrics-core</artifactId>
+                <version>3.2.3</version>
+            </dependency>
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>2.9.3</version>
+            </dependency>
+            <dependency>
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
                 <version>1.2.17</version>
@@ -36,6 +66,10 @@
                 <artifactId>gobblin-api</artifactId>
                 <version>${gobblin.version}</version>
                 <exclusions>
+                    <exclusion>
+                        <groupId>com.google.code.findbugs</groupId>
+                        <artifactId>annotations</artifactId>
+                    </exclusion>
                     <exclusion>
                         <groupId>org.slf4j</groupId>
                         <artifactId>jcl-over-slf4j</artifactId>
@@ -115,6 +149,21 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.gobblin</groupId>
+                <artifactId>gobblin-core-base</artifactId>
+                <version>${gobblin.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>jcl-over-slf4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>log4j-over-slf4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.gobblin</groupId>
                 <artifactId>gobblin-kafka-1</artifactId>
                 <version>${gobblin.version}</version>
                 <exclusions>
@@ -134,7 +183,7 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.gobblin</groupId>
-                <artifactId>gobblin-metastore</artifactId>
+                <artifactId>gobblin-kafka-common</artifactId>
                 <version>${gobblin.version}</version>
                 <exclusions>
                     <exclusion>
@@ -145,15 +194,26 @@
                         <groupId>org.slf4j</groupId>
                         <artifactId>log4j-over-slf4j</artifactId>
                     </exclusion>
-                    <exclusion>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                    </exclusion>
                 </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.apache.gobblin</groupId>
                 <artifactId>gobblin-metrics</artifactId>
+                <version>${gobblin.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>jcl-over-slf4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>log4j-over-slf4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.gobblin</groupId>
+                <artifactId>gobblin-metrics-base</artifactId>
                 <version>${gobblin.version}</version>
                 <exclusions>
                     <exclusion>
@@ -215,6 +275,11 @@
                         <artifactId>derby</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-common</artifactId>
+                <version>2.3.0</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.kafka</groupId>
@@ -324,30 +389,19 @@
                     <groupId>org.basepom.maven</groupId>
                     <artifactId>duplicate-finder-maven-plugin</artifactId>
                     <configuration>
-                        <ignoredClassPatterns>
-                            <ignoredClassPattern>org.apache.gobblin.kafka.client.Kafka1ConsumerClient</ignoredClassPattern>
-                            <ignoredClassPattern>org.apache.gobblin.source.extractor.extract.kafka.KafkaSource</ignoredClassPattern>
-                        </ignoredClassPatterns>
+                        <ignoredResourcePatterns>plugin.xml</ignoredResourcePatterns>
                         <ignoredDependencies>
                             <!--
                                 the following dependencies are problematic but non trivial to
                                 clean, it will come in a second time...
                             -->
                             <dependency>
-                                <groupId>org.datanucleus</groupId>
-                                <artifactId>datanucleus-api-jdo</artifactId>
-                            </dependency>
-                            <dependency>
-                                <groupId>org.datanucleus</groupId>
-                                <artifactId>datanucleus-core</artifactId>
-                            </dependency>
-                            <dependency>
-                                <groupId>org.datanucleus</groupId>
-                                <artifactId>datanucleus-rdbms</artifactId>
+                                <groupId>javax.servlet</groupId>
+                                <artifactId>servlet-api</artifactId>
                             </dependency>
                             <dependency>
                                 <groupId>javax.servlet</groupId>
-                                <artifactId>servlet-api</artifactId>
+                                <artifactId>javax.servlet-api</artifactId>
                             </dependency>
                             <dependency>
                                 <groupId>org.mortbay.jetty</groupId>
@@ -382,24 +436,12 @@
                                 <artifactId>stax-api</artifactId>
                             </dependency>
                             <dependency>
-                                <groupId>com.google.code.findbugs</groupId>
-                                <artifactId>annotations</artifactId>
-                            </dependency>
-                            <dependency>
-                                <groupId>com.google.code.findbugs</groupId>
-                                <artifactId>jsr305</artifactId>
-                            </dependency>
-                            <dependency>
                                 <groupId>com.sun.mail</groupId>
                                 <artifactId>javax.mail</artifactId>
                             </dependency>
                             <dependency>
                                 <groupId>javax.mail</groupId>
                                 <artifactId>mailapi</artifactId>
-                            </dependency>
-                            <dependency>
-                                <groupId>javax.mail</groupId>
-                                <artifactId>mail</artifactId>
                             </dependency>
                             <dependency>
                                 <groupId>com.sun.activation</groupId>
