@@ -1,16 +1,16 @@
 package org.wikimedia.gobblin.publisher;
 
-import com.google.common.util.concurrent.Striped;
+import java.util.concurrent.locks.Lock;
 
 import org.apache.gobblin.util.ParallelRunner;
 import org.apache.hadoop.fs.FileAlreadyExistsException;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.locks.Lock;
+import com.google.common.util.concurrent.Striped;
+
 
 public class ParallelRunnerWithTouch extends ParallelRunner {
 

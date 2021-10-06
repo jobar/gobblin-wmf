@@ -19,7 +19,7 @@ package org.wikimedia.gobblin.compression;
 
 
 /**
- * Gzip codec using a '.gz' extension instead of '.gzip'
+ * Gzip codec using a '.gz' extension instead of '.gzip'.
  */
 public class GzipCodec extends org.apache.gobblin.codec.GzipCodec {
 

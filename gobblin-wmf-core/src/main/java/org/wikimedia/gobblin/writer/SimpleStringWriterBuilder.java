@@ -22,20 +22,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Preconditions;
-
 import org.apache.gobblin.codec.StreamCodec;
 import org.apache.gobblin.compression.CompressionConfigParser;
 import org.apache.gobblin.configuration.State;
 import org.apache.gobblin.crypto.EncryptionConfigParser;
 import org.apache.gobblin.crypto.EncryptionFactory;
 import org.apache.gobblin.instrumented.writer.InstrumentedDataWriterDecorator;
-import org.wikimedia.gobblin.compression.CompressionFactory;
 import org.apache.gobblin.writer.DataWriter;
 import org.apache.gobblin.writer.DataWriterBuilder;
 import org.apache.gobblin.writer.FsDataWriterBuilder;
 import org.apache.gobblin.writer.MetadataWriterWrapper;
+import org.wikimedia.gobblin.compression.CompressionFactory;
 
+import com.google.common.base.Preconditions;
 
 /**
  * A {@link DataWriterBuilder} for building {@link DataWriter} that writes String.

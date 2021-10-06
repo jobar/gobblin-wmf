@@ -17,14 +17,18 @@
 
 package org.wikimedia.gobblin.writer.partitioner;
 
-import com.google.common.base.Optional;
+import java.io.File;
+import java.io.IOException;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.gobblin.configuration.ConfigurationKeys;
 import org.apache.gobblin.configuration.State;
 import org.apache.gobblin.stream.RecordEnvelope;
-import org.wikimedia.gobblin.TimestampedRecord;
-import org.wikimedia.gobblin.writer.TimestampedStringRecordDataWriterBuilder;
-import org.apache.gobblin.writer.*;
+import org.apache.gobblin.writer.DataWriter;
+import org.apache.gobblin.writer.DataWriterBuilder;
+import org.apache.gobblin.writer.Destination;
+import org.apache.gobblin.writer.PartitionedDataWriter;
+import org.apache.gobblin.writer.WriterOutputFormat;
 import org.apache.gobblin.writer.partitioner.TimeBasedWriterPartitioner;
 import org.apache.hadoop.fs.Path;
 import org.joda.time.DateTime;
@@ -34,9 +38,10 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.wikimedia.gobblin.TimestampedRecord;
+import org.wikimedia.gobblin.writer.TimestampedStringRecordDataWriterBuilder;
 
-import java.io.File;
-import java.io.IOException;
+import com.google.common.base.Optional;
 
 
 /**
@@ -104,14 +109,16 @@ public class TestTimestampedRecordOrJsonStringTimeBasedWriterPartitioner {
         state.setProp(TimeBasedWriterPartitioner.WRITER_PARTITION_TIMEUNIT, "seconds");
         DataWriter<Object> secsPartitionWriter = getWriter(state);
         // This timestamp corresponds to 2015/01/03
-        secsPartitionWriter.writeEnvelope(new RecordEnvelope<>(new TimestampedRecord<>("{\"meta\": {\"dt\": 1420272000}}", Optional.absent())));
+        secsPartitionWriter.writeEnvelope(
+                new RecordEnvelope<>(
+                        new TimestampedRecord<>("{\"meta\": {\"dt\": 1420272000}}", Optional.absent())));
         secsPartitionWriter.close();
         secsPartitionWriter.commit();
         // Check that the writer reports that 1 record has been written
         Assert.assertEquals(secsPartitionWriter.recordsWritten(), 1);
 
         // Check that 3 files were created
-        Assert.assertEquals(FileUtils.listFiles(new File(TEST_ROOT_DIR), new String[] { "txt" }, true).size(), 3);
+        Assert.assertEquals(FileUtils.listFiles(new File(TEST_ROOT_DIR), new String[] {"txt"}, true).size(), 3);
 
         // Check if each file exists, and in the correct location
         File baseOutputDir = new File(OUTPUT_DIR, BASE_FILE_PATH);
@@ -123,7 +130,7 @@ public class TestTimestampedRecordOrJsonStringTimeBasedWriterPartitioner {
 
         String currentDatePath = DateTimeFormat.forPattern("yyyy" + Path.SEPARATOR + "MM" + Path.SEPARATOR + "dd").print(currentDateTime);
         File outputDirCurrent =
-                new File(baseOutputDir,currentDatePath + Path.SEPARATOR + FILE_NAME);
+                new File(baseOutputDir, currentDatePath + Path.SEPARATOR + FILE_NAME);
         Assert.assertTrue(outputDirCurrent.exists());
 
         File outputDir20150103 =

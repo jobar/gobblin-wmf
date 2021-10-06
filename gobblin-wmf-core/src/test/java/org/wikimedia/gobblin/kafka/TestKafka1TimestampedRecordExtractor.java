@@ -20,23 +20,25 @@ package org.wikimedia.gobblin.kafka;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import com.google.common.base.Optional;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.gobblin.configuration.WorkUnitState;
-import org.wikimedia.gobblin.copy.Kafka1ConsumerClient;
-import org.apache.gobblin.source.extractor.DataRecordException;
-import org.wikimedia.gobblin.TimestampedRecord;
-import org.apache.kafka.common.record.TimestampType;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
-/**
- * Tests for {@link Kafka1TimestampedRecordExtractor}
- */
+import org.apache.gobblin.configuration.WorkUnitState;
+import org.apache.gobblin.source.extractor.DataRecordException;
+import org.apache.kafka.common.record.TimestampType;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import org.wikimedia.gobblin.TimestampedRecord;
+import org.wikimedia.gobblin.copy.Kafka1ConsumerClient;
 
+import com.google.common.base.Optional;
+
+import lombok.extern.slf4j.Slf4j;
+
+
+/**
+ * Tests for {@link Kafka1TimestampedRecordExtractor}.
+ */
 @Slf4j
 public class TestKafka1TimestampedRecordExtractor {
 
@@ -130,7 +132,7 @@ public class TestKafka1TimestampedRecordExtractor {
         Kafka1TimestampedRecordExtractor<byte[]> kTRE = new Kafka1TimestampedRecordExtractor(mockWorkUnitState);
 
         Kafka1ConsumerClient.Kafka1ConsumerRecord<Object, Object> mockKafkaConsumerRecord =
-                TestUtils.getMockKafkaConsumerRecord(TimestampType.NO_TIMESTAMP_TYPE, 0l, testPayload, TEST_TOPIC_NAME);
+                TestUtils.getMockKafkaConsumerRecord(TimestampType.NO_TIMESTAMP_TYPE, 0L, testPayload, TEST_TOPIC_NAME);
 
         TimestampedRecord<byte[]> expected = new TimestampedRecord<>(testPayload, Optional.absent());
         TimestampedRecord<byte[]> actual = kTRE.decodeKafkaMessage(mockKafkaConsumerRecord);
@@ -171,6 +173,5 @@ public class TestKafka1TimestampedRecordExtractor {
 
         kTRE.decodeRecord(null);
     }
-
 
 }

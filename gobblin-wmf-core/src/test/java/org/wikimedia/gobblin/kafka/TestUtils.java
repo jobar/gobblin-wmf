@@ -18,30 +18,37 @@
 
 package org.wikimedia.gobblin.kafka;
 
-import com.google.common.base.Optional;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+
 import org.apache.gobblin.configuration.ConfigurationKeys;
 import org.apache.gobblin.configuration.State;
 import org.apache.gobblin.configuration.WorkUnitState;
-import org.wikimedia.gobblin.copy.Kafka1ConsumerClient;
 import org.apache.gobblin.source.extractor.WatermarkInterval;
-import org.wikimedia.gobblin.copy.KafkaSource;
 import org.apache.gobblin.source.extractor.extract.kafka.MultiLongWatermark;
 import org.apache.gobblin.source.workunit.WorkUnit;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.record.TimestampType;
+import org.wikimedia.gobblin.copy.Kafka1ConsumerClient;
+import org.wikimedia.gobblin.copy.KafkaSource;
 
-import java.util.ArrayList;
+import com.google.common.base.Optional;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
-public class TestUtils {
+public final class TestUtils {
+
+    private TestUtils() {
+        // Hiding constructor of utility class
+    }
+
     public static WorkUnitState getMockWorkUnitState(Optional<String> extractedTimestampTypes,
                                                Optional<String> useCurrentTimestampAsDefault,
                                                String testTopicName) {
         WorkUnit mockWorkUnit = WorkUnit.createEmpty();
-        mockWorkUnit.setWatermarkInterval(new WatermarkInterval(new MultiLongWatermark(new ArrayList<Long>(){{add(0L);}}),
-                new MultiLongWatermark(new ArrayList<Long>(){{add(10L);}})));
+        mockWorkUnit.setWatermarkInterval(new WatermarkInterval(new MultiLongWatermark(new ArrayList<Long>() { { add(0L); } }),
+                new MultiLongWatermark(new ArrayList<Long>() { { add(10L); } })));
 
         WorkUnitState mockWorkUnitState = new WorkUnitState(mockWorkUnit, new State());
         mockWorkUnitState.setProp(KafkaSource.TOPIC_NAME, testTopicName);

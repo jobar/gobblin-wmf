@@ -18,7 +18,13 @@
 
 package org.wikimedia.gobblin.publisher;
 
-import com.google.common.io.Files;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.apache.gobblin.configuration.ConfigurationKeys;
 import org.apache.gobblin.configuration.State;
 import org.apache.gobblin.configuration.WorkUnitState;
@@ -26,9 +32,7 @@ import org.apache.gobblin.source.workunit.WorkUnit;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import com.google.common.io.Files;
 
 @Test
 public class TestTimePartitionedFlagDataPublisher {
@@ -72,7 +76,7 @@ public class TestTimePartitionedFlagDataPublisher {
         State mainState = new State();
         mainState.setProp(ConfigurationKeys.DATA_PUBLISHER_FINAL_DIR, this.publisherDir);
         // Only set parent publisherDir for t1 (others are done in the children tasks)
-        for (File publishedDir: this.publishedDirs){
+        for (File publishedDir: this.publishedDirs) {
             mainState.appendToSetProp(ConfigurationKeys.PUBLISHER_DIRS, publishedDir.getAbsolutePath());
         }
         return mainState;

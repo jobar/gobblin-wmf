@@ -17,11 +17,14 @@
 
 package org.wikimedia.gobblin.writer;
 
-import lombok.extern.slf4j.Slf4j;
-import org.wikimedia.gobblin.TimestampedRecord;
-import org.apache.gobblin.writer.*;
-
 import java.io.IOException;
+
+import org.apache.gobblin.writer.DataWriter;
+import org.apache.gobblin.writer.DataWriterBuilder;
+import org.apache.gobblin.writer.MetadataWriterWrapper;
+import org.wikimedia.gobblin.TimestampedRecord;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * A {@link DataWriterBuilder} for building {@link DataWriter} that writes a

@@ -17,22 +17,24 @@
 
 package org.wikimedia.gobblin.kafka;
 
-import com.google.common.base.Optional;
-import org.apache.gobblin.configuration.WorkUnitState;
-import org.apache.gobblin.kafka.client.ByteArrayBasedKafkaRecord;
-import org.wikimedia.gobblin.copy.Kafka1ConsumerClient;
-import org.apache.gobblin.kafka.client.KafkaConsumerRecord;
-import org.apache.gobblin.source.extractor.DataRecordException;
-import org.apache.gobblin.source.extractor.extract.kafka.KafkaExtractor;
-
-import lombok.extern.slf4j.Slf4j;
-import org.wikimedia.gobblin.TimestampedRecord;
-import org.apache.kafka.common.record.TimestampType;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+
+import org.apache.kafka.common.record.TimestampType;
+import org.apache.gobblin.configuration.WorkUnitState;
+import org.apache.gobblin.kafka.client.ByteArrayBasedKafkaRecord;
+import org.apache.gobblin.kafka.client.KafkaConsumerRecord;
+import org.apache.gobblin.source.extractor.DataRecordException;
+import org.apache.gobblin.source.extractor.extract.kafka.KafkaExtractor;
+import org.wikimedia.gobblin.copy.Kafka1ConsumerClient;
+import org.wikimedia.gobblin.TimestampedRecord;
+
+import com.google.common.base.Optional;
+
+import lombok.extern.slf4j.Slf4j;
+
 
 /**
  * Extracts {@link TimestampedRecord<P>} records from Kafka using Kafka1 client.
@@ -106,7 +108,7 @@ public class Kafka1TimestampedRecordExtractor<P> extends KafkaExtractor<Object, 
     protected TimestampedRecord<P> decodeKafkaMessage(KafkaConsumerRecord message) throws DataRecordException, IOException {
 
         TimestampedRecord<P> record = null;
-        if (message instanceof Kafka1ConsumerClient.Kafka1ConsumerRecord){
+        if (message instanceof Kafka1ConsumerClient.Kafka1ConsumerRecord) {
             Kafka1ConsumerClient.Kafka1ConsumerRecord typedRecord = (Kafka1ConsumerClient.Kafka1ConsumerRecord)message;
             // if value is null then this is a bad record that is returned for further error handling, so raise an error
             if (typedRecord.getValue() == null) {

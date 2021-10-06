@@ -17,15 +17,15 @@
 
 package org.wikimedia.gobblin.writer;
 
-
-import org.wikimedia.gobblin.TimestampedRecord;
-import org.apache.gobblin.writer.DataWriter;
-import org.apache.gobblin.writer.FsDataWriter;
-
 import java.io.IOException;
 
+import org.apache.gobblin.writer.DataWriter;
+import org.apache.gobblin.writer.FsDataWriter;
+import org.wikimedia.gobblin.TimestampedRecord;
+
+
 /**
- * Copied and updated from SimpleDataWriter
+ * Copied and updated from SimpleDataWriter.
  */
 public class TimestampedRecordWriterWrapper<P> implements DataWriter<TimestampedRecord<P>> {
 
