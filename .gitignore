@@ -24,6 +24,7 @@ hs_err_pid*
 
 # Intellij files
 .idea/*
+*.iml
 
 # Maven generated classes
 **/target/*
